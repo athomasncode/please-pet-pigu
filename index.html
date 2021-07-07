@@ -1,0 +1,113 @@
+<html>
+
+	<head>
+
+		<title> Please pet Pigu! </title>
+
+		<style>
+
+			.petButton button:hover { transform: scale(1.10); }
+
+			
+			img {
+				user-drag: none; 
+user-select: none;
+-moz-user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+-ms-user-select: none;
+			}
+
+			#score {
+				position: absolute;
+				top: 300px;
+				left: 700px;
+
+			}
+			
+
+
+
+
+		</style>
+
+	</head>
+
+	<body>
+		<center>
+		<label id = "WelcomeMsg">This is Pigu the penguin. He is very lonely. Please pet Pigu.</label>
+
+		<p> <span id="score"> </span> </p>
+
+		<img src= "images/cryingCutePenguin.gif" id="sadpenguin" height = "256px" width= "256px">
+
+
+		<!-- onclick="addToScore(1) this will add the score by 1-->
+
+		<div class= "petButton">
+
+			<button onclick = "style.display = 'none';thankYouMsg();changeImage();addToScore(1);saveGame()"> Click to pet </button>
+
+		</div>
+
+		</center>
+		<script>
+
+			var localStorage = window.localStorage;
+
+			var score = 0;
+
+			
+
+
+
+			function addToScore(amount) {
+				score = score + amount;
+
+				document.getElementById("score").innerHTML = 'Total Pets Received: ' + score ;
+
+
+			}
+
+			function changeImage() {
+				document.getElementById('sadpenguin').src="images/happypenguin.gif";
+
+
+
+			}
+
+			function thankYouMsg() {
+				document.getElementById("WelcomeMsg").innerHTML = 'Pigu is feeling better now that you petted him. Pigu still wants more pets! Please visit soon.' ;
+
+
+			}
+
+			function hide() {
+				button.style.display = "none";
+
+			}
+
+			function loadGame() {
+				var savedGame = JSON.parse(localStorage.getItem("gameSave"));
+				if (typeof savedGame.score !== "undefined") score = savedGame.score;
+			}
+
+			function saveGame() {
+				var gameSave = {
+					score: score
+
+
+				};
+				localStorage.setItem('gameSave', JSON.stringify(gameSave));
+			}
+
+			window.onload = function() {
+				loadGame();
+			}
+
+		</script>
+
+
+	</body>
+
+</html>
